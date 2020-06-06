@@ -191,10 +191,9 @@
 .items-grid li span {
   flex: 1;
   margin-top: 12px;
-
   display: flex;
   align-items: center;
-  color: var(--title-color)
+  color: var(--title-color);
 }
 
 .items-grid li.selected {

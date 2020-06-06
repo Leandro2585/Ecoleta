@@ -7,7 +7,8 @@ import { LeafletMouseEvent } from 'leaflet';
 import './style.css';
 import logo from '../../assets/logo.svg';
 import axios from 'axios';
-import Dropzone from '../../comonents/Dropzone';
+import Dropzone from '../../components/Dropzone';
+
 
 interface Item {
   id: number;
@@ -59,7 +60,7 @@ const CreatePoint = () => {
   useEffect(() => {
     api.get('items').then(res => {
       setItems(res.data);
-    });
+    })
   }, []);
 
   useEffect(() => {
@@ -78,8 +79,9 @@ const CreatePoint = () => {
     axios.get<IBGECityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectUf}/municipios`)
       .then(res => {
     const cityNames = res.data.map(city => city.nome);
-
+      
     setCities(cityNames);
+      })
   }, [selectUf]);
 
 
@@ -97,8 +99,8 @@ const CreatePoint = () => {
 
   function handleMapClick(event: LeafletMouseEvent){
     setSelectPosition([
-      event.latlgn.lat,
-      event.latlgn.lng,
+      event.latlng.lat,
+      event.latlng.lng,
     ])
   }
 
@@ -144,9 +146,7 @@ const CreatePoint = () => {
 
     await api.post('points', data);
 
-    alert('Ponto de coleta criado!');
-
-    history.push('/');
+    return history.push('/');
   }
   return(
     <div id="page-create-point">
@@ -175,7 +175,7 @@ const CreatePoint = () => {
               type="text"
               name="name"
               id="name"
-              onChage={handleInputChange} />
+              onChange={handleInputChange} />
           </div>
 
           <div className="field-group">
@@ -185,7 +185,7 @@ const CreatePoint = () => {
                 type="email"
                 name="email"
                 id="email"
-                onChage={handleInputChange} />
+                onChange={handleInputChange} />
             </div>
             <div className="field">
               <label htmlFor="whatsapp">Whatsapp</label>
@@ -193,7 +193,7 @@ const CreatePoint = () => {
                 type="text"
                 name="whatsapp"
                 id="whatsapp"
-                onChage={handleInputChange} />
+                onChange={handleInputChange} />
             </div>
           </div>
 
@@ -255,7 +255,7 @@ const CreatePoint = () => {
               key={item.id}
               onClick={() => handleSelectItem(item.id)}
               className={selectItems.includes(item.id) ? 'selected' : ''}>
-              <img src={item.image_url} alt={item.title} />
+              <img src={item.image_url}/>
               <span>{item.title}</span>
             </li>
             ))}

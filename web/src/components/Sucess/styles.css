@@ -1,0 +1,14 @@
+div.sucess{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-color: var(--title-color);
+    opacity:0.9;
+    align-items: center;
+}
+div.sucess i{
+    color: var(--primary-color);
+}
+div.sucess span{
+    color: var(--text-color);
+}
